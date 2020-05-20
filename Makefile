@@ -13,7 +13,7 @@ BIN = $(CP) -O binary -S
 
 #chip compile flags
 CHIP_SPEC = -mcpu=cortex-m3 -mthumb
-CHIP_DEFS = -DSTM32F103X_MD -DUSE_STDPERIPH_DRIVER
+CHIP_DEFS = -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER
 
 PROJECT_NAME = stm32f103_led_demo
 
@@ -21,7 +21,7 @@ PROJECT_NAME = stm32f103_led_demo
 BUILD_DIR = build
 
 #source files
-ASM_SOURCES = libs/CMSIS/startup/startup_stm32f10x_md.s
+ASM_SOURCES = libs/CMSIS/startup/gcc_ride7/startup_stm32f10x_md.s
 C_SOURCES = 
 INCLUDES = 
 
@@ -43,10 +43,10 @@ CFLAGS = $(CHIP_DEFS) $(CHIP_SPEC) $(INCLUDES) -Wall  -Wfatal-errors -MMD -fdata
 ASFLAGS = $(CFLAGS)
 
 # link script
-LDSCRIPT = STM32F103R8Tx_FLASH.ld
+LDSCRIPT = STM32F103C8Tx_FLASH.ld
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR $()LIBS -Wl,-Map=$()BUILD_DIR)/$(PROJECT_NAME).map,--cref -Wl,--gc-sections
+LDFLAGS = $(CHIP_SPEC) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(PROJECT_NAME).map,--cref -Wl,--gc-sections
 
 # default action: build all
 all: $(BUILD_DIR)/$(PROJECT_NAME).elf $(BUILD_DIR)/$(PROJECT_NAME).hex $(BUILD_DIR)/$(PROJECT_NAME).bin

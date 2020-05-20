@@ -3,9 +3,9 @@
 
 #include "stm32f10x.h"
 
-#define LED_G_GPIO_PIN              GPIO_Pin_0
-#define LED_G_GPIO_PORT             GPIOB
-#define LED_G_GPIO_CLK              RCC_APB2Periph_GPIOB
+#define LED_G_GPIO_PIN              GPIO_Pin_1
+#define LED_G_GPIO_PORT             GPIOA
+#define LED_G_GPIO_CLK              RCC_APB2Periph_GPIOA
 
 
 #define    ON        1
